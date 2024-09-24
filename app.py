@@ -1,14 +1,15 @@
-import pytesseract
+import easyocr
 from PIL import Image
 import gradio as gr
 
-# Set the path to the Tesseract executable
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# Initialize the EasyOCR Reader
+reader = easyocr.Reader(['en', 'hi'])  # You can specify the languages here
 
 # Function to extract text from the image
 def ocr_image(image):
-    extracted_text = pytesseract.image_to_string(image, lang='eng+hin')
-    return extracted_text
+    extracted_text = reader.readtext(image)
+    # Combine the text results into a single string
+    return " ".join([text[1] for text in extracted_text])
 
 # Function to search for a keyword in the extracted text
 def search_keyword(extracted_text, keyword):
