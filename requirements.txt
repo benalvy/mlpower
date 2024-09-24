@@ -2,6 +2,5 @@ torch
 torchvision
 transformers
 gradio
-pytesseract
+easyocr
 Pillow
-streamlit
